@@ -1,0 +1,213 @@
+<div class="page-sections">
+    <div class="section-wrapper section-intro full-height"><div class="section-position" id="intro"></div>
+        <div class="section full-height">
+            <div class="container">
+                <div class="conference-logo"><img src="/img/logo_grunge.png" alt="RevolutionConf Logo"></div>
+                <div class="row dividers text-xs-center">
+                    <div class="col-sm-6 col-lg-3">
+                        <i class="fa fa-map-marker"></i> Virginia Beach, VA
+                        <div class="border"></div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <i class="fa fa-calendar"></i> 5/13/2016
+                        <div class="border hidden-md-down"></div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <i class="fa fa-microphone"></i> 28 Sessions
+                        <div class="border"></div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <i class="fa fa-ticket"></i> 250 Attendees
+                    </div>
+                </div>
+                <div class="conference-description" ng-bind-html="vm.Content.intro"></div>
+            </div>
+        </div>
+    </div>
+    <div class="section-wrapper section-about"><div class="section-position" id="about"></div>
+        <div class="section">
+            <div class="container text-xs-center">
+                <h2 class="section-title">About</h2>
+                <div class="text-xs-center intro-text" ng-bind-html="vm.Content.about_us"></div>
+                <h2>Organizers</h2>
+                <div class="row row-center">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-repeat="contributor in vm.Organizers">
+                        <contributor></contributor>
+                    </div>
+                </div>
+                <p><a ui-sref="about" class="btn btn-primary btn-lg">See all Volunteers</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="section-wrapper section-tickets bg-grey"><div class="section-position" id="tickets"></div>
+        <div class="section">
+            <div class="container">
+                <h2 class="section-title">Tickets</h2>
+                <div class="text-xs-center intro-text" ng-bind-html="vm.Content.tickets"></div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-12 col-md-offset-0">
+                        <div class="row row-center">
+                            <div class="col-md-6" ng-repeat="ticket in vm.Tickets">
+                                <div class="card card-block text-xs-center" ng-class="{'not-available' : !ticket.available}">
+                                    <h4 class="card-title">
+                                        <span class="price" ng-bind="'$'+ticket.cost"></span>
+                                        <span ng-bind="ticket.title"></span>
+                                        <span class="discount" ng-if="ticket.discount">(<span ng-bind="ticket.discount"></span>% Off Current Price)</span>
+                                    </h4>
+                                    <div class="card-text" ng-bind-html="ticket.description"></div>
+                                    <div class="action">
+                                        <a ng-href="{{ticket.button_link}}" outbound-track target="_blank" class="btn btn-primary btn-lg" ng-bind="ticket.button_text"
+                                        ng-disabled="!ticket.available" ng-class="{'disabled' :  !ticket.available}"></a><span class="next-release" ng-bind="ticket.next_release ? 'More Coming ' + ticket.next_release : '&nbsp;'"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-wrapper section-signup" id="signup">
+        <div class="section">
+            <div class="container">
+                <h3 class="section-title">Join the Movement</h3>
+                <form action="//revolutionconf.activehosted.com/proc.php" method="post" id="_form_14" accept-charset="utf-8" enctype="multipart/form-data"
+                target="_blank" novalidate="" class="form-inline" sign-up-form>
+                    <input type="hidden" name="f" value="14">
+                    <input type="hidden" name="s" value="">
+                    <input type="hidden" name="c" value="0">
+                    <input type="hidden" name="m" value="0">
+                    <input type="hidden" name="act" value="sub">
+                    <input type="hidden" name="nlbox[]" value="1">
+                    <div class="form-inline text-xs-center">
+                        <div class="form-group">
+                            <input type="text" name="fullname" class="form-control form-control-lg" placeholder="Enter Your Full Name">
+                            <span class="text-danger">Name required.</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter your Email">
+                            <span class="text-danger">Valid email required.</span>
+                        </div>
+                        <div class="form-group">
+                            <button style="margin-top: 0" type="submit" class="btn btn-primary btn-lg">Sign&nbsp;Up</button>
+                        </div>
+                        <div class="col-md-8 text-success">Thanks for signing up!</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="section-wrapper section-speakers bg-dark"><div class="section-position" id="speakers"></div>
+        <div class="section">
+            <div class="container">
+                <h2 class="section-title">Speakers</h2>
+                <div class="text-xs-center intro-text" ng-bind-html="vm.Content.speakers"></div>
+                <hr>
+                <div ng-if="vm.KeynoteSpeaker" ng-repeat="contributor in [vm.KeynoteSpeaker]">
+                    <h3 class="section-subtitle">Keynote Speaker</h3>
+                    <div class="row row-center">
+                        <div class="col-sm-12 keynote-speaker">
+                            <div class="contributor" data-contributor_id="{{contributor.ID}}">
+                                <div class="row">
+                                    <div class="col-xs-8 col-xs-offset-2 col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-4 pull-xs-center pull-md-left">
+                                        <div class="square-container circle-awesome">
+                                            <div class="img-wrapper"><img ng-src="{{contributor.featured_image}}" ng-srcset="{{contributor.featured_image_srcset || ''}}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix hidden-md-up img-content-sep"></div>
+                                    <div class="col-md-8 text-xs-center text-md-left">
+                                        <h2>{{contributor.name}}</h2>
+                                        <p class="intro-text">{{contributor.title}}<span ng-if="contributor.include_company && contributor.company_name">, <a ng-if="contributor.company_website" class="text-grey" target="_blank" href="{{contributor.company_website}}">{{contributor.company_name}}</a><span ng-if="!contributor.company_website">{{contributor.company_name}}</span>
+                                            </span>
+                                            <span class="pull-md-right">
+                                            <a ng-if="contributor.twitter" target="_blank" href="https://twitter.com/{{contributor.twitter}}">
+                                            <i class="fa fa-fw fa-twitter"></i></a>
+                                            <a ng-if="contributor.linkedin" target="_blank" href="https://www.linkedin.com/in/{{contributor.linkedin}}">
+                                            <i class="fa fa-fw fa-linkedin"></i></a>
+                                            <a ng-if="contributor.facebook" target="_blank" href="https://www.facebook.com/{{contributor.facebook}}">
+                                            <i class="fa fa-fw fa-facebook-official"></i></a>
+                                            <a ng-if="contributor.personal_website" target="_blank" href="{{contributor.personal_website}}">
+                                                <i class="fa fa-fw fa-globe"></i></a>
+                                            </span>
+                                        </p>
+                                        <div class="content">
+                                            <p ng-bind="contributor.bio"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr>
+                </div>
+                <h3 class="section-subtitle">Session Speakers</h3>
+                <div class="row row-center text-xs-center">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="contributor in vm.Speakers">
+                        <contributor></contributor>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-wrapper section-sessions"><div class="section-position" id="sessions"></div>
+        <div class="section" ng-class="{'open' : sessionAllopen}">
+            <div class="container text-xs-center">
+                <h2 class="section-title" ng-click="sessionAllopen = !sessionAllopen">Sessions</h2>
+                <div class="text-xs-center intro-text" ng-bind-html="vm.Content.sessions"></div>
+                <p><a ui-sref="schedule" class="btn btn-primary">Full Schedule</a></p>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 text-xs-center" ng-class-odd="'text-sm-right clear-left'" ng-repeat="session in vm.Sessions" ng-class-even="'text-sm-left pull-sm-left clear-right'" ng-class="{'open' : session.open}">
+                        <div class="session">
+                            <p><strong class="title">{{session.title}}</strong><br>
+                                <a ng-repeat="contributor in [session.speaker]" contributor-details="{{contributor.ID}}" ng-click="">{{contributor.name}}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <p><a ui-sref="schedule" class="btn btn-primary btn-lg">Full Schedule</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="section-wrapper section-sponsors bg-grey"><div class="section-position" id="sponsors"></div>
+        <div class="section">
+            <div class="container text-xs-center">
+                <h2 class="section-title">Sponsors</h2>
+                <div class="text-xs-center intro-text" ng-bind-html="vm.Content.sponsors"></div>
+                <div class="row">
+                    <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-6 col-md-4 col-lg-3" ng-repeat="sponsor in vm.Sponsors">
+                        <sponsor></sponsor>
+                    </div>
+                </div>
+                <p><a target="_blank" href="/media/SponsorPackage.pdf" outbound-track target="_blank" class="btn btn-primary btn-lg">Want to Sponsor?</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="section-wrapper section-location"><div class="section-position" id="location"></div>
+        <div class="section">
+            <div class="container">
+                <h2 class="section-title text-xs-left">Location</h2>
+                <div class="content">
+                    <p class="title">Virginia Beach Resort Hotel</p>
+                    <p>2800 Shore Drive
+                        <br>Virginia Beach, VA 23451</p>
+                    <p><a href="https://www.google.com/maps/place/Virginia+Beach+Resort+Hotel+and+Conference+Center,+2800+Shore+Dr,+Virginia+Beach,+VA+23451/@36.912851,-76.0703607,17z/"
+                        class="pull-xs-left" target="_blank"><i class="fa fa-map-o"></i> View Map</a><span class="pull-xs-right"
+                        title="Thanks @paulchinjr"><i class="fa fa-car"></i> Free Parking</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-wrapper">
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6" ng-repeat="section in vm.Content.location">
+                        <h3 class="title uppercase" ng-bind="section.title"></h3>
+                        <div class="content" ng-bind-html="section.content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

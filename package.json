@@ -1,0 +1,32 @@
+{
+  "name": "revconf-2016",
+  "version": "1.0.0",
+  "description": "RevolutionConf is a one-day, platform and language agnostic, software development conference being held on May 13, 2016 in Virginia Beach, VA.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://iambriansreed@github.com/RevolutionConf-Staging/Website-App-2016.git"
+  },
+  "author": "Brian S. Reed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RevolutionConf/Website/issues"
+  },
+  "homepage": "http://RevolutionConf.com",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.7",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.1",
+    "gulp-uglify": "^1.5.3",
+    "jshint": "^2.9.2"
+  },
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  }
+}

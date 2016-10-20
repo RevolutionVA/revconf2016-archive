@@ -1,0 +1,25 @@
+<div class="contributor" contributor-details="{{contributor.ID}}">
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-8 col-sm-offset-0 col-sm-12">
+            <div class="square-container circle-awesome">
+                <div class="img-wrapper"><img ng-src="{{contributor.featured_image}}" ng-srcset="{{contributor.featured_image_srcset || ''}}"></div>
+                <div class="cover bg-dark">
+                    <div class="vertical-center">
+                        <div class="content">
+                            <a data-no-bubble ng-if="contributor.twitter" target="_blank" href="https://twitter.com/{{contributor.twitter}}"><i class="fa fa-twitter"></i></a>
+                            <a data-no-bubble ng-if="contributor.linkedin" target="_blank" href="https://www.linkedin.com/in/{{contributor.linkedin}}"><i class="fa fa-linkedin"></i></a>
+                            <a data-no-bubble ng-if="contributor.facebook" target="_blank" href="https://www.facebook.com/{{contributor.facebook}}"><i class="fa fa-facebook-official"></i></a>
+                            <a data-no-bubble ng-if="contributor.personal_website" target="_blank" href="{{contributor.personal_website}}"><i class="fa fa-globe"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3>{{contributor.name}}</h3>
+    <p>{{contributor.title}}<span ng-if="contributor.include_company && contributor.company_name"><br>
+            <a ng-if="contributor.company_website" class="text-grey" target="_blank" href="{{contributor.company_website}}">{{contributor.company_name}}</a>
+            <span ng-if="!contributor.company_website">{{contributor.company_name}}</span>
+        </span>
+    </p>
+</div>

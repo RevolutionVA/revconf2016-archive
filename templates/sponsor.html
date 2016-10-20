@@ -1,0 +1,8 @@
+<div class="sponsor" ng-attr-id="sponsor-{{sponsor.slug}}">
+    <div class="square-container hidden-xs-down">
+        <div class="img-wrapper"><img ng-src="{{sponsor.featured_image}}" ng-srcset="{{sponsor.featured_image_srcset || ''}}"></div>
+        <h4 class="open-sans" ng-bind="sponsor.title"></h4>
+    </div>
+    <img class="hidden-sm-up" ng-src="{{sponsor.featured_image}}" ng-srcset="{{sponsor.featured_image_srcset || ''}}">
+    <a ng-href="{{sponsor.sponsor_url}}" target="_blank"></a>
+</div>

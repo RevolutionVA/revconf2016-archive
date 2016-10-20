@@ -1,0 +1,6 @@
+.DS_Store
+CNAME
+/typings
+launch.json
+node_modules
+.vscode

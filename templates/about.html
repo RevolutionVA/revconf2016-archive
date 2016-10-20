@@ -1,0 +1,30 @@
+<div class="page-sections">
+    <div class="section-wrapper section-about" id="/home/about">
+        <div class="section">
+            <div class="container text-xs-center">
+                <h2 class="page-title">About RevolutionConf</h2>
+                <div class="text-xs-center intro-text" ng-bind-html="vm.Content.about_us"></div>
+                <h2 style="font-size: 2.5rem; color: #aa0000;">Organizers</h2>
+                <div class="row row-center">
+                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3" ng-repeat="contributor in vm.Organizers">
+                        <contributor></contributor>
+                    </div>
+                </div>
+                <hr>
+                <h2 style="font-size: 2.5rem; color: #aa0000;">Advisors</h2>
+                <div class="row row-center">
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" ng-repeat="contributor in vm.Advisors">
+                        <contributor></contributor>
+                    </div>
+                </div>
+                <hr>
+                <h2 style="font-size: 2.5rem; color: #aa0000;">Volunteers</h2>
+                <div class="row row-center">
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" ng-repeat="contributor in vm.Volunteers">
+                        <contributor></contributor>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

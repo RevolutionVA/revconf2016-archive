@@ -1,0 +1,92 @@
+<div class="page-sections">
+    <div class="section-wrapper section-schedule" id="schedule">
+        <div class="section">
+            <div class="container">
+                <h2 class="page-title text-xs-center">Schedule</h2>
+                <div class="schedule open-sans">
+                    <div class="hidden-md-up" style="margin-top: 2.5rem;">&nbsp;</div>
+                    <div class="text-xs-center pull-md-right open-sans" style="margin-top: -5rem; margin-bottom: 1rem; text-transform: none;">
+                        <div class="btn-group">
+                            <button type="button" style="text-transform: none; border: none;" class=" btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw" ng-class="{'fa-floppy-o' : !vm.Save.Active, 'fa-spinner fa-pulse' : vm.Save.Active}"></i> <span ng-if="!vm.Save.Active"
+                            >Saved </span><span ng-if="vm.Save.Active"
+                            >Saving </span><span
+                             ng-if="vm.Save.Server">to Server</span><span
+                             ng-if="!vm.Save.Server">Locally</span></button>
+                            <div class="dropdown-menu">
+                                <span class="dropdown-item" ng-click="vm.Save.methodSwitch()">Save <span
+                             ng-if="vm.Save.Server">Locally</span><span
+                             ng-if="!vm.Save.Server">to Server</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-sm-7 col-md-8 form-inline text-xs-center text-sm-left">
+                            <span class="btn btn-secondary" ng-click="show_desc_all = !show_desc_all; vm.filterUpdated()">
+                                <span ng-show="show_desc_all"><i class="fa fa-fw fa-minus"></i></span>
+                                <span ng-show="!show_desc_all"><i class="fa fa-fw fa-plus"></i></span>
+                            </span>
+                            <span class="btn btn-secondary" ng-click="vm.filter.favs = !vm.filter.favs; vm.filterUpdated()">
+                                <span ng-show="!vm.filter.favs"><i class="fa fa-fw fa-heart-o"></i></span>
+                                <span ng-show="vm.filter.favs"><i class="fa fa-fw fa-heart"></i></span>
+                            </span>
+                            <select class="form-control c-select" ng-model="vm.filter.room" ng-change="vm.filterUpdated()">
+                                <option value="">Any Room</option>
+                                <option>Chesapeake Room A & B</option>
+                                <option>Chesapeake Room C</option>
+                                <option>Lynnhaven Room</option>
+                                <option>Virginia Room</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5 col-md-4">
+                            <div class="input-icon-group">
+                                <input type="text" class="form-control" placeholder="Search" ng-model="vm.filter.search" style="background: none;" ng-keyup="vm.filterUpdated()">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1.5rem" ng-if="vm.filter.favs || vm.filter.room || vm.filter.search">Showing <strong ng-if="vm.filter.favs">favorited </strong>sessions<span ng-if="vm.filter.room"> in the <strong>{{vm.filter.room}}</strong> room</span><span
+                    ng-if="vm.filter.search"> matching the search <strong>'{{vm.filter.search}}'</strong></span>.</h5>
+                    <hr style="margin-top: 0.5rem;">
+                    <div class="timeslot" ng-repeat="timeslot in vm.Schedule" ng-if="(timeslot.items | filter:vm.filterEvents).length">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-2 text-darkgrey uppercase">
+                                <p class="hidden-lg-up">{{timeslot.starts_pretty}} TO {{timeslot.ends_pretty}}</p>
+                                <p class="hidden-md-down">{{timeslot.starts_pretty}} TO<br>{{timeslot.ends_pretty}}</p>
+                            </div>
+                            <div class="col-xs-11 col-xs-offset-1 col-lg-offset-0 col-lg-10" style="border-left: 1px solid rgba(0,0,0,.1);">
+                                <div ng-repeat="item in timeslot.items | orderBy:'room' | filter:vm.filterEvents" class="item">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-10">
+                                            <p style="margin-bottom: 0.5rem;">
+                                                <strong ng-bind="item.title"></strong>
+                                            </p>
+                                            <p ng-if="item.room || item.speaker">
+                                                <span ng-if="item.speaker" class="speaker" ng-repeat="speaker in [item.speaker]">
+                                                    <i class="fa fa-user text-grey fa-fw"></i> <a ng-click="" contributor-details="{{speaker.ID}}">{{speaker.name}}</a> | <small><span>{{speaker.title}}</span><span
+                                                    ng-if="speaker.company_name">, <a ng-if="speaker.company_website" class="text-grey" target="_blank" href="{{speaker.company_website}}">{{speaker.company_name}}</a><span ng-if="!speaker.company_website">{{speaker.company_name}}</span></span>
+                                                    </small>
+                                                   <br>
+                                                </span>
+                                                <i class="fa fa-map-marker text-grey fa-fw"></i> <span ng-bind="item.room"></span>
+                                            </p>
+                                            <div ng-show="show_desc_all || item.show_desc" class="description" ng-bind-html="item.description"></div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-2 text-xs-right" ng-if="item.description">
+                                            <span class="btn btn-secondary btn-sm" ng-click="item.show_desc = !item.show_desc"><i class="fa fa-fw fa-plus" ng-show="!show_desc_all && !item.show_desc"></i><i class="fa fa-fw fa-minus" ng-show="show_desc_all || item.show_desc"></i></span>
+                                            <span ng-if="timeslot.eventIds" class="btn btn-secondary btn-sm btn-favorite" 
+                                            ng-click="vm.favoriteItems[item.ID] = !vm.favoriteItems[item.ID]; vm.favoriteItemsUpdated(item)"><i class="fa fa-fw" ng-class="{'fa-heart' : vm.favoriteItems[item.ID], 'fa-heart-o' : !vm.favoriteItems[item.ID]}"></i></span>
+                                        </div>
+                                    </div>
+                                    <hr ng-if="!$last">
+                                </div>
+                            </div>
+                        </div>
+                        <hr ng-if="!$last">
+                    </div>
+                    <div class="no-timeslots"><p>No events matched your search.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
